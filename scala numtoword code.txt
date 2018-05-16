@@ -1,0 +1,44 @@
+ def numtoword(num: Int, printZero: Boolean = true): String = {
+         if (num < 0) s"negative ${numtoword(-num)}"
+      else if (num >= 1000000000) (num%1000000000) match {
+      case 0 => s"${numtoword(num / 1000000000)} billion ${numtoword(num % 1000000000, false)}"
+      case n@_ => s"${numtoword(num / 1000000000)} billion, ${numtoword(num % 1000000000, false)}"
+      }
+      else if (num >= 1000000) (num%1000000) match {
+      case 0 => s"${numtoword(num / 1000000)} million ${numtoword(num % 1000000, false)}"
+      case n@_ => s"${numtoword(num / 1000000)} million, ${numtoword(num % 1000000, false)}"
+      }
+      else if (num >= 1000) (num%1000) match {
+      case 0 => s"${numtoword(num / 1000)} thousand ${numtoword(num % 1000, false)}"
+      case n@_ => s"${numtoword(num / 1000)} thousand, ${numtoword(num % 1000, false)}"
+      }
+      else if (num >= 100) (num%100) match {
+      case 0 => s"${numtoword(num / 100)} hundred ${numtoword(num % 100, false)}"
+      case n@_ => s"${numtoword(num / 100)} hundred and ${numtoword(num % 100, false)}"
+      }
+      else if (num >= 20) (num/10) match {
+      case 2 => s"twenty ${numtoword(num % 10, false)}"
+      case 3 => s"thirty ${numtoword(num % 10, false)}"
+	  case 4 => s"forty ${numtoword(num % 10, false)}"
+      case 5 => s"fifty ${numtoword(num % 10, false)}"
+      case n@_ => s"${numtoword(n).stripSuffix("t")}ty ${numtoword(num % 10, false)}"
+      }
+      else num match {
+      case 0 => if (printZero) "zero" else ""
+      case 1 => "one"
+              case 2 => "two"
+              case 3 => "three"
+              case 4 => "four"
+              case 5 => "five"
+              case 6 => "six"
+              case 7 => "seven"
+              case 8 => "eight"
+              case 9 => "nine"
+              case 10 => "ten"
+              case 11 => "eleven"
+              case 12 => "twelve"
+              case 13 => "thirteen"
+              case 15 =>"fifteen";
+              case n@_ => s"${numtoword(n-10).stripSuffix("t")}teen"
+      }
+      }
